@@ -26,7 +26,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
     const [currUser, setCurrUser] = useState<User | null>(null);
-
+    
     async function getUserByID(id: number) {
         await delay(500); // mock getting user from db
         const thisUser: User = {

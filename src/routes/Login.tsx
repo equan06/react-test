@@ -23,7 +23,7 @@ export default function Login() {
 
         let loginSuccess = await login(data.username, data.password);
         if (loginSuccess)
-            navigate("/");
+            navigate("/landing");
         else
             console.error("login failed");            
     }

@@ -1,7 +1,9 @@
 import './App.css'
-import Root from "routes/Root"
-import Login from "routes/Login"
+import MainLayout from "components/MainLayout";
+
 import Landing from "routes/Landing"
+import Login from "routes/Login"
+import Test from 'routes/Test';
 
 import {
     createBrowserRouter,
@@ -9,15 +11,21 @@ import {
 } from "react-router-dom"
 import { ChakraProvider } from '@chakra-ui/react'
 import { AuthProvider } from 'contexts/AuthContext'
+import { ProtectedRoute } from 'components/ProtectedRoute';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root/>,
+        element: <MainLayout/>,
         children: [
             {
-                path: "/",
-                element: <Landing></Landing>
+                element: <ProtectedRoute/>,
+                children: [
+                    {
+                        path: "landing",
+                        element: <Landing></Landing>
+                    }
+                ]
             },
         ]
     },

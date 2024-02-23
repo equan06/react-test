@@ -1,13 +1,11 @@
-import { useNavigate } from "react-router-dom"
+import { useAuth } from "contexts/AuthContext"
 
-export default function Landing()
-{
-let navigate = useNavigate();
+export default function Landing() {
+    let { currUser } = useAuth();
 
     return (
         <>
-            <h1>Welcome</h1>
-            <button onClick={() => navigate("/login")}>Login</button>
+            <h1>Welcome, {currUser?.username }</h1>
         </>
     )
 }
