@@ -1,5 +1,7 @@
-import { createContext, useContext, useState, PropsWithChildren } from "react"
+import { createContext, useContext, useState, PropsWithChildren, useEffect } from "react"
 
+const USER_CACHE = "userStorage";
+const cachedUser = localStorage.getItem(USER_CACHE);
 
 export type User = {
     id: number,
@@ -15,6 +17,7 @@ export type AuthContextType = {
     signUp: (username: string, password:string, email: string) => Promise<void>
 }
 
+
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuth = () => {
@@ -25,7 +28,11 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
-    const [currUser, setCurrUser] = useState<User | null>(null);
+    const [currUser, setCurrUser] = useState<User | null>(() => {
+        if (cachedUser != null)
+            return JSON.parse(cachedUser);
+        return null;
+    });
     
     async function getUserByID(id: number) {
         await delay(500); // mock getting user from db
@@ -53,6 +60,8 @@ export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
     
             const thisUser = await getUserByID(userID);
             setCurrUser(thisUser);
+
+            localStorage.setItem(USER_CACHE, JSON.stringify(thisUser));
         }
         catch (error) {
             console.error(error);
@@ -65,6 +74,7 @@ export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
         await delay(200);
         console.log("logged out")
         setCurrUser(null);
+        localStorage.removeItem(USER_CACHE);
     }
 
     return (

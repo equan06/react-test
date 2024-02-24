@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate, Link } from "react-router-dom"
 import { Button } from "@chakra-ui/react"
 import { useAuth } from "contexts/AuthContext"
 // Put all default layout stuff here, including navigation, user profile, etc.
@@ -9,6 +9,10 @@ export default function MainLayout() {
     return (
         <div>
             Main Layout
+
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/landing">Landing</Link>
             <br/>
             {
                 currUser == null ? 

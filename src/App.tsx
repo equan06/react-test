@@ -4,6 +4,7 @@ import MainLayout from "components/MainLayout";
 import Landing from "routes/Landing"
 import Login from "routes/Login"
 import Test from 'routes/Test';
+import About from 'routes/About';
 
 import {
     createBrowserRouter,
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "landing",
-                        element: <Landing></Landing>
+                        element: <Landing/>
+                    },
+                    { 
+                        path: "about",
+                        element: <About/>
                     }
                 ]
             },
