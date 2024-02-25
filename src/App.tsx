@@ -13,6 +13,7 @@ import {
 import { ChakraProvider } from '@chakra-ui/react'
 import { AuthProvider } from 'contexts/AuthContext'
 import { ProtectedRoute } from 'components/ProtectedRoute';
+import CreateActivity from 'routes/CreateActivity';
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
                     { 
                         path: "about",
                         element: <About/>
+                    },
+                    {
+                        path: "activities",
+                        element: <CreateActivity/>
                     }
                 ]
             },
